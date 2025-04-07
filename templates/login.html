@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Household Services Provider{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <style>
+        body {
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border: none;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            font-size: 1rem;
+            padding: 12px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card w-100" style="max-width: 500px;">
+            <div class="title text-center">Login</div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form method="POST">
+                
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="mb-3 d-grid">
+                    <input type="submit" value="Login" class="btn btn-primary btn-custom">
+                </div>
+                
+                <div class="text-center">
+                    <a href="{{ url_for('register') }}">Register Customer/Professional</a><br>
+                    <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+                </div>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{{ url_for('index') }}">Back to Home</a>   
+    </div>
+</body>
+</html>
